@@ -1,0 +1,34 @@
+{
+  "-MiBsBKGWFEU-yluJkL-": {
+    "firebaseKey": "-MiBsBKGWFEU-yluJkL-",
+    "name": "Thomas Rice",
+    "role": "Attack",
+    "image": "https://i.imgur.com/N17SuvI.png",
+    "uid": "123",
+    "team_id": "-MiBsBKGWFEU-yluJip-"
+  },
+  "-MiBsBKGWFEU-yluJkM-": {
+    "firebaseKey": "-MiBsBKGWFEU-yluJkM-",
+    "name": "Michael Brantley",
+    "role": "Forward Middle",
+    "image": "https://i.imgur.com/FYFuXOf.png",
+    "uid": "123",
+    "team_id": "-MiBsBKGWFEU-yluJip-"
+  },
+  "-MiBsBKGWFEU-yluJkN-": {
+    "firebaseKey": "-MiBsBKGWFEU-yluJkN-",
+    "name": "Hallie Tucker",
+    "role": "Defensive Dude",
+    "image": "https://i.imgur.com/92O302G.png",
+    "uid": "123",
+    "team_id": "-MiBsBKGWFEU-yluJip-"
+  },
+  "-MiBsBKGWFEU-yluJkZ-": {
+    "firebaseKey": "-MiBsBKGWFEU-yluJkN-",
+    "name": "Evan Morgan",
+    "role": "Built Historian",
+    "image": "https://i.imgur.com/92O302G.png",
+    "uid": "123",
+    "team_id": "-MiBsBKGWFEU-yluJip-"
+  }
+}
