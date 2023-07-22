@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
-    treatUndefinedAsUnspecified: true,
+    treatUndefinedAsUnspecified: 'off',
     'no-unused-vars': 'error',
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',

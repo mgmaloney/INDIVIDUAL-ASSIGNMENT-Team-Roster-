@@ -1,11 +1,20 @@
+/* eslint-disable react/destructuring-assignment */
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { updateTeam } from '../../utils/api/teamData';
+import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
+import { FloatingLabel, Button } from 'react-bootstrap';
+import { createTeam, updateTeam } from '../../utils/api/teamData';
 
-function TeamForm() {
+const initialState = {
+  name: '',
+  image: '',
+  private: false,
+};
+
+export default function TeamForm(obj) {
   const [formInput, setFormInput] = useState();
   const router = useRouter();
-  const { user } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -13,21 +22,21 @@ function TeamForm() {
   };
 
   const handleSubmit = () => {
-    if(obj.firebaseKey) {
-        updateTeam(formInput)
-        router.push('/')
+    if (obj.firebaseKey) {
+      updateTeam(formInput);
+      router.push('/');
     } else {
-        createTeam(formInput)
-        router.push('/')
+      createTeam(formInput);
+      router.push('/');
     }
-  }
+  };
 
   return (
-    <Form onSubmit={handleSubmit} >
-        <h2 className="text-white mt-5">
-            {obj.firebaseKey ? 'Update' : 'Create'} Team
-        </h2>
-        <FloatingLabel
+    <Form onSubmit={handleSubmit}>
+      <h2 className="text-white mt-5">
+        {obj.firebaseKey ? 'Update' : 'Create'} Team
+      </h2>
+      <FloatingLabel
         controlId="floatingInput1"
         label="Team Name"
         className="mb-3"
@@ -71,12 +80,23 @@ function TeamForm() {
           }));
         }}
       />
-      
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit">
         {obj.firebaseKey ? 'Update' : 'Create'} Team
       </Button>
     </Form>
-  )
+  );
 }
+
+TeamForm.propTypes = {
+  obj: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.string,
+    favorite: PropTypes.bool,
+  }),
+};
+
+TeamForm.defaultProps = {
+  obj: initialState,
+};
