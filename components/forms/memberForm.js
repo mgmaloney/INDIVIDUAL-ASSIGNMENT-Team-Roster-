@@ -1,8 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
+import { FloatingLabel, Button } from 'react-bootstrap';
 import { createMember, updateMember } from '../../utils/api/memberData';
-import { FloatingLabel } from 'react-bootstrap';
+import { useAuth } from '../../utils/context/authContext';
+
 import { getUserTeams } from '../../utils/api/teamData';
 
+const initialState = {
+  name: '',
+  image: '',
+  role: '',
+  team_id: '',
+  firebaseKey: '',
+};
 function MemberForm({ obj }) {
   const [formInput, setFormInput] = useState();
   const [teams, setTeams] = useState();
@@ -22,7 +34,7 @@ function MemberForm({ obj }) {
     if (obj.firebaseKey) {
       setFormInput(obj);
     }
-  }, [obj]);
+  }, [obj, user.uid]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,5 +118,20 @@ function MemberForm({ obj }) {
     </Form>
   );
 }
+
+MemberForm.propTypes = {
+  obj: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.string,
+    role: PropTypes.string,
+    team_id: PropTypes.bool,
+    title: PropTypes.string,
+    firebaseKey: PropTypes.string,
+  }),
+};
+
+MemberForm.defaultProps = {
+  obj: initialState,
+};
 
 export default MemberForm;

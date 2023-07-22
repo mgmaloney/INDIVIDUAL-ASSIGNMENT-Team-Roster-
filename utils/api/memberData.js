@@ -35,16 +35,7 @@ const deleteMember = async (memberFbKey) => {
     console.warn(e);
   }
 };
-const createMember = async (memberFbKey) => {
-  try {
-    const { data } = await axios.post(`${dbURL}/members.json`);
-    const firebaseKey = data.name;
-    await updateMember({ firebaseKey });
-    return data;
-  } catch (e) {
-    console.warn(e);
-  }
-};
+
 const updateMember = async (payload) => {
   try {
     const { data } = await axios.patch(
@@ -56,4 +47,21 @@ const updateMember = async (payload) => {
   }
 };
 
-export { getTeamMembers, getSingleMember, deleteMember, createMember, updateMember };
+const createMember = async () => {
+  try {
+    const { data } = await axios.post(`${dbURL}/members.json`);
+    const firebaseKey = data.name;
+    await updateMember({ firebaseKey });
+    return data;
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
+export {
+  getTeamMembers,
+  getSingleMember,
+  deleteMember,
+  createMember,
+  updateMember,
+};

@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable consistent-return */
 import axios from 'axios';
 import { clientCredentials } from '../client';
 import { deleteMember, getTeamMembers } from './memberData';
@@ -49,7 +51,7 @@ const updateTeam = async (payload) => {
 const createTeam = async () => {
   try {
     const { data } = await axios.post(`${dbURL}/teams.json`);
-    let firebaseKey = data.name;
+    const firebaseKey = data.name;
     await updateTeam({ firebaseKey });
     return data;
   } catch (e) {
@@ -60,13 +62,12 @@ const createTeam = async () => {
 const deleteTeamAndMembers = async (firebaseKey) => {
   try {
     const { teamMembers } = await getTeamMembers(firebaseKey);
-    for (member of teamMembers) {
+    teamMembers.forEach((member) => {
       deleteMember(member.firebaseKey);
-    }
+    });
     const { teamData } = await axios.delete(
       `${dbURL}/teams.json/"${firebaseKey}"`
     );
-
     return teamData;
   } catch (e) {
     console.warn(e);
@@ -76,6 +77,7 @@ const deleteTeamAndMembers = async (firebaseKey) => {
 export {
   getAllPublicTeams,
   getUserTeams,
+  getSingleTeam,
   updateTeam,
   createTeam,
   deleteTeamAndMembers,
