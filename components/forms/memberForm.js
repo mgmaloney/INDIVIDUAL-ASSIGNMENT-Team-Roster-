@@ -40,10 +40,10 @@ function MemberForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       await updateMember(formInput);
-      router.push(`/team/${formInput.team_id}`);
+      router.push(`/member/${formInput.firebaseKey}`);
     } else {
       await createMember(formInput);
-      router.push(`/team/${formInput.team_id}`);
+      router.push(`/member/${formInput.firebaseKey}`);
     }
   };
 
