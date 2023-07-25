@@ -32,12 +32,12 @@ export default function MemberCard({ memberObj, onUpdate }) {
           {memberObj.role}
         </Card.Subtitle>
         <Card.Text>Team: {cardTeam}</Card.Text>
-        <Link href={`/team/member/${memberObj.firebaseKey}`} passHref>
+        <Link passHref href={`/team/member/${memberObj.firebaseKey}`}>
           <Button variant="primary" className="m-2">
             VIEW
           </Button>
         </Link>
-        <Link href={`team/member/edit/${memberObj.firebaseKey}`} passHref>
+        <Link passHref href={`team/member/edit/${memberObj.firebaseKey}`}>
           <Button variant="info">EDIT</Button>
         </Link>
         <Button variant="danger" onClick={deleteMember} className="m-2">
