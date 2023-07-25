@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { getSingleTeam } from '../../utils/api/teamData';
+import { deleteMember } from '../../utils/api/memberData';
 
 export default function MemberCard({ memberObj, onUpdate }) {
-  const [cardTeam, setCardTeam] = useState();
-
-  useEffect(() => {
-    getSingleTeam(memberObj.team_id).then(setCardTeam);
-  }, [memberObj.team_id]);
-
-  const deleteMember = () => {
+  const deleteSingleMember = () => {
     if (window.confirm(`Delete ${memberObj.name}?`)) {
       deleteMember(memberObj.firebaseKey).then(() => onUpdate());
     }
@@ -31,7 +24,7 @@ export default function MemberCard({ memberObj, onUpdate }) {
         <Card.Subtitle className="mb-2 text-muted">
           {memberObj.role}
         </Card.Subtitle>
-        <Card.Text>Team: {cardTeam}</Card.Text>
+        <Card.Text>Team: {memberObj.team?.name}</Card.Text>
         <Link passHref href={`/team/member/${memberObj.firebaseKey}`}>
           <Button variant="primary" className="m-2">
             VIEW
@@ -40,7 +33,7 @@ export default function MemberCard({ memberObj, onUpdate }) {
         <Link passHref href={`team/member/edit/${memberObj.firebaseKey}`}>
           <Button variant="info">EDIT</Button>
         </Link>
-        <Button variant="danger" onClick={deleteMember} className="m-2">
+        <Button variant="danger" onClick={deleteSingleMember} className="m-2">
           DELETE
         </Button>
       </Card.Body>
@@ -52,9 +45,14 @@ MemberCard.propTypes = {
   memberObj: PropTypes.shape({
     name: PropTypes.string,
     image: PropTypes.string,
-    role: PropTypes.bool,
+    role: PropTypes.string,
     team_id: PropTypes.string,
     firebaseKey: PropTypes.string,
+    team: PropTypes.shape({
+      name: PropTypes.string,
+      image: PropTypes.string,
+      firebaseKey: PropTypes.string,
+    }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

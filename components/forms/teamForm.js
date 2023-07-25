@@ -15,7 +15,7 @@ const initialState = {
 };
 
 export default function TeamForm(obj) {
-  const [formInput, setFormInput] = useState({});
+  const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
   const router = useRouter();
 

@@ -11,7 +11,6 @@ const getAllPublicTeams = async () => {
     const { data } = await axios.get(
       `${dbURL}/teams.json?orderBy="private"&equalTo=${false}`
     );
-    console.warn(data);
     return data;
   } catch (e) {
     console.warn(e);
@@ -32,6 +31,14 @@ const getUserTeams = async (uid) => {
 const getSingleTeam = async (firebaseKey) => {
   try {
     const { data } = await axios.get(`${dbURL}/teams/${firebaseKey}.json`);
+    return data;
+  } catch (e) {
+    console.warn(e);
+  }
+};
+const deleteTeam = async (firebaseKey) => {
+  try {
+    const { data } = await axios.delete(`${dbURL}/teams/${firebaseKey}.json`);
     return data;
   } catch (e) {
     console.warn(e);
@@ -82,5 +89,6 @@ export {
   getSingleTeam,
   updateTeam,
   createTeam,
+  deleteTeam,
   deleteTeamAndMembers,
 };

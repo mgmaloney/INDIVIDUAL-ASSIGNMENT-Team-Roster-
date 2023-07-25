@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { getTeamMembers } from '../../utils/api/memberData';
-import { deleteTeamAndMembers } from '../../utils/api/teamData';
+import { deleteTeam, deleteTeamAndMembers } from '../../utils/api/teamData';
 
 export default function TeamCard({ teamObj, onUpdate }) {
   const [teamPlayers, setTeamPlayers] = useState([]);
@@ -13,11 +13,16 @@ export default function TeamCard({ teamObj, onUpdate }) {
     getTeamMembers(teamObj.firebaseKey)
       .then((response) => Object.values(response))
       .then(setTeamPlayers);
-    console.warn('teamplayas', teamPlayers);
   }, [teamObj]);
 
   const deleteThisTeam = () => {
-    deleteTeamAndMembers(teamObj.firebaseKey).then(() => onUpdate());
+    if (window.confirm(`Delete Team: ${teamObj.name}`)) {
+      if (teamPlayers.length > 0) {
+        deleteTeamAndMembers(teamObj.firebaseKey).then(() => onUpdate());
+      } else {
+        deleteTeam(teamObj.firebaseKey).then(() => onUpdate());
+      }
+    }
   };
 
   return (

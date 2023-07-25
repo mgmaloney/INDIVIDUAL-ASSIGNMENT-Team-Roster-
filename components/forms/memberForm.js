@@ -42,10 +42,10 @@ function MemberForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       await updateMember(formInput);
-      router.push(`/member/${formInput.firebaseKey}`);
+      router.push(`team/member/${formInput.firebaseKey}`);
     } else {
       await createMember(formInput);
-      router.push(`/member/${formInput.firebaseKey}`);
+      router.push(`team/member/${formInput.firebaseKey}`);
     }
   };
 
@@ -126,7 +126,7 @@ MemberForm.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
     role: PropTypes.string,
-    team_id: PropTypes.bool,
+    team_id: PropTypes.string,
     title: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
