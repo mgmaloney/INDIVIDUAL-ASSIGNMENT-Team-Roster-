@@ -7,10 +7,13 @@ import { getTeamMembers } from '../../utils/api/memberData';
 import { deleteTeamAndMembers } from '../../utils/api/teamData';
 
 export default function TeamCard({ teamObj, onUpdate }) {
-  const [teamPlayers, setTeamPlayers] = useState();
+  const [teamPlayers, setTeamPlayers] = useState([]);
 
   useEffect(() => {
-    getTeamMembers(teamObj.firebaseKey).then(setTeamPlayers);
+    getTeamMembers(teamObj.firebaseKey)
+      .then((response) => Object.values(response))
+      .then(setTeamPlayers);
+    console.warn('teamplayas', teamPlayers);
   }, [teamObj]);
 
   const deleteThisTeam = () => {

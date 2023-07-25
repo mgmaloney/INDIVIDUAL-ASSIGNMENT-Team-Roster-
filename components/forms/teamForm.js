@@ -1,9 +1,11 @@
 /* eslint-disable react/destructuring-assignment */
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel, Button } from 'react-bootstrap';
+import { useAuth } from '../../utils/context/authContext';
 import { createTeam, updateTeam } from '../../utils/api/teamData';
 
 const initialState = {
@@ -13,7 +15,8 @@ const initialState = {
 };
 
 export default function TeamForm(obj) {
-  const [formInput, setFormInput] = useState();
+  const [formInput, setFormInput] = useState({});
+  const { user } = useAuth();
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -21,12 +24,14 @@ export default function TeamForm(obj) {
     setFormInput((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (obj.firebaseKey) {
-      updateTeam(formInput);
+      await updateTeam(formInput);
       router.push('/');
     } else {
-      createTeam(formInput);
+      console.warn(formInput);
+      await createTeam({ ...formInput, uid: user.uid });
       router.push('/');
     }
   };
@@ -71,7 +76,7 @@ export default function TeamForm(obj) {
         type="switch"
         id="private"
         name="private"
-        label="On Sale?"
+        label="Private?"
         checked={formInput.private}
         onChange={(e) => {
           setFormInput((prevState) => ({

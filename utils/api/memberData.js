@@ -39,7 +39,8 @@ const deleteMember = async (memberFbKey) => {
 const updateMember = async (payload) => {
   try {
     const { data } = await axios.patch(
-      `${dbURL}/members/${payload.firebaseKey}.json`
+      `${dbURL}/members/${payload.firebaseKey}.json`,
+      payload
     );
     return data;
   } catch (e) {
@@ -47,9 +48,9 @@ const updateMember = async (payload) => {
   }
 };
 
-const createMember = async () => {
+const createMember = async (payload) => {
   try {
-    const { data } = await axios.post(`${dbURL}/members.json`);
+    const { data } = await axios.post(`${dbURL}/members.json`, payload);
     const firebaseKey = data.name;
     await updateMember({ firebaseKey });
     return data;

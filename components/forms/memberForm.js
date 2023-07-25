@@ -16,8 +16,8 @@ const initialState = {
   firebaseKey: '',
 };
 function MemberForm({ obj }) {
-  const [formInput, setFormInput] = useState();
-  const [teams, setTeams] = useState();
+  const [formInput, setFormInput] = useState({});
+  const [teams, setTeams] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -30,7 +30,9 @@ function MemberForm({ obj }) {
   };
 
   useEffect(() => {
-    getUserTeams(user.uid).then(setTeams);
+    getUserTeams(user.uid)
+      .then((response) => Object.values(response))
+      .then(setTeams);
     if (obj.firebaseKey) {
       setFormInput(obj);
     }
@@ -103,7 +105,7 @@ function MemberForm({ obj }) {
           required
         >
           <option value="">Select a Team</option>
-          {teams?.map((team) => (
+          {teams.map((team) => (
             <option key={team.firebaseKey} value={team.firebaseKey}>
               {team.name}
             </option>
