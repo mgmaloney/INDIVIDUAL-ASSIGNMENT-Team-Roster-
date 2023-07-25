@@ -20,3 +20,23 @@ a {
 body {
   background-color: #88effd;
 }
+
+#team-div, #team-members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.top-btn,
+#team-header,
+#single-member {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#single-member {
+  background-color: black;
+}
