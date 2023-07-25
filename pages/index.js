@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
-import { useAuth } from '../utils/context/authContext';
-import { getAllPublicTeams } from '../utils/api/teamData';
-import TeamCard from '../components/cards/teamCard';
+// import { useEffect, useState } from 'react';
+
+// import { getAllPublicTeams } from '../utils/api/teamData';
+// import TeamCard from '../components/cards/teamCard';
 
 function Home() {
-  const [teams, setTeams] = useState();
+  // const [teams, setTeams] = useState();
 
-  const getPublicTeams = () => {
-    getAllPublicTeams().then(setTeams);
-  };
+  // const getPublicTeams = () => {
+  //   getAllPublicTeams().then(setTeams);
+  // };
 
-  useEffect(() => {
-    getPublicTeams();
-  }, []);
+  // useEffect(() => {
+  //   getPublicTeams();
+  // }, []);
 
   return (
     <div
