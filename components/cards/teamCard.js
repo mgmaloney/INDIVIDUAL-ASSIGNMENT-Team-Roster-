@@ -26,14 +26,21 @@ export default function TeamCard({ teamObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
+    <Card
+      className="card"
+      style={{
+        width: '18rem',
+        margin: '10px',
+        'border-radius': '0 0 30px 30px',
+      }}
+    >
       <Card.Img
         variant="top"
         src={teamObj.image}
         alt={teamObj.name}
-        style={{ height: '400px' }}
+        style={{ height: '300px', 'object-fit': 'cover' }}
       />
-      <Card.Body>
+      <Card.Body className="card-body">
         <Card.Title>{teamObj.name}</Card.Title>
         <Card.Text>Members: {teamPlayers.length}</Card.Text>
         <Link passHref href={`/team/${teamObj.firebaseKey}`}>
