@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { getSingleMember } from '../../../../utils/api/memberData';
 import MemberForm from '../../../../components/forms/memberForm';

@@ -16,14 +16,21 @@ export default function MemberCard({ memberObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
+    <Card
+      className="card"
+      style={{
+        width: '18rem',
+        margin: '10px',
+        'border-radius': '0 0 30px 30px',
+      }}
+    >
       <Card.Img
         variant="top"
         src={memberObj.image}
         alt={memberObj.name}
-        style={{ height: '400px', 'object-fit': 'cover' }}
+        style={{ height: '300px', 'object-fit': 'cover' }}
       />
-      <Card.Body>
+      <Card.Body className="card-body">
         <Card.Title>{memberObj.name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           {memberObj.role}

@@ -2,12 +2,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      className="custom-nav"
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+    >
       <Container>
         <Link passHref href="/">
           <Navbar.Brand>Teamster</Navbar.Brand>
@@ -19,12 +25,12 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Teams</Nav.Link>
             </Link>
-            <Link passHref href="/team/new">
-              <Nav.Link>Create New Team</Nav.Link>
+            <Link passHref href="/myteams">
+              <Nav.Link>My Teams</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>
+            <Navbar.Text className="signout" onClick={signOut}>
               Sign Out
-            </Button>
+            </Navbar.Text>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,26 +1,27 @@
 /* eslint-disable operator-linebreak */
 import { useEffect, useState } from 'react';
-import { getAllPublicTeams } from '../utils/api/teamData';
+import { useAuth } from '../utils/context/authContext';
+import { getUserTeams } from '../utils/api/teamData';
 import TeamCard from '../components/cards/teamCard';
 
-function Home() {
-  const [teams, setTeams] = useState([]);
+export default function MyTeams() {
+  const { user } = useAuth();
+  const [teams, setTeams] = useState({});
 
-  const getPublicTeams = () => {
-    getAllPublicTeams()
+  const getTeams = () => {
+    getUserTeams(user.uid)
       .then((response) => Object.values(response))
       .then(setTeams);
   };
 
   useEffect(() => {
-    getPublicTeams();
-    console.warn(teams);
-  }, []);
+    getTeams();
+  }, [user.uid]);
 
   return (
     <>
       <div className="header-div">
-        <h1 className="header">Teams!</h1>
+        <h1 className="header">My Teams!</h1>
       </div>
       <div
         id="home-div"
@@ -31,12 +32,10 @@ function Home() {
             <TeamCard
               key={team.firebaseKey}
               teamObj={team}
-              onUpdate={getPublicTeams}
+              onUpdate={getTeams}
             />
           ))}
       </div>
     </>
   );
 }
-
-export default Home;
