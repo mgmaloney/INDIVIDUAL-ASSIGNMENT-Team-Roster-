@@ -21,7 +21,8 @@ body {
   background-color: #88effd;
 }
 
-#team-div, #team-members {
+#team-div,
+#team-members {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,14 +30,40 @@ body {
 }
 
 .top-btn,
-#team-header,
+.header,
 #single-member {
-  margin: 1rem;
+  margin: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#member-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #single-member {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: black;
+  width: 90%;
+  flex-grow: 0;
+}
+
+#home-div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  flex-grow: 1;
+  height: '70vh';
+  padding: '30px';
+  max-height: '75%';
+  margin-top: 3rem;
+}
+
+.member-text {
+  padding-right: 10%;
 }

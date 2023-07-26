@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
@@ -14,10 +14,16 @@ const initialState = {
   private: false,
 };
 
-export default function TeamForm(obj) {
+export default function TeamForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (obj.firebaseKey) {
+      setFormInput(obj);
+    }
+  }, [obj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,6 +105,7 @@ TeamForm.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
     favorite: PropTypes.bool,
+    firebaseKey: PropTypes.string,
   }),
 };
 
