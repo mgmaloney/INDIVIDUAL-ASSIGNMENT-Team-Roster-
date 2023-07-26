@@ -42,10 +42,10 @@ function MemberForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       await updateMember(formInput);
-      router.push(`team/member/${formInput.firebaseKey}`);
+      router.back();
     } else {
       await createMember(formInput);
-      router.push(`team/member/${formInput.firebaseKey}`);
+      router.back();
     }
   };
 

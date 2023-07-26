@@ -1,20 +1,21 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { getSingleMember } from '../../../utils/api/memberData';
+import MemberContext from '../../../utils/context/memberContext';
 
 export default function SingleMember() {
   const router = useRouter();
   const { firebaseKey } = router.query;
-  const [member, setMember] = useState({});
+  const { member, setMember } = useContext(MemberContext);
 
   useEffect(() => {
     getSingleMember(firebaseKey).then(setMember);
   }, [firebaseKey]);
 
   const returnToTeam = () => {
-    router.push(`/team/${member.team_id}`);
+    router.back();
   };
 
   return (
@@ -24,17 +25,17 @@ export default function SingleMember() {
           Back to team
         </Button>
       </div>
-      <div id="single-member">
-        <div className="d-flex flex-column">
+      <div id="member-container">
+        <div id="single-member">
           <img
             src={member.image}
             alt={member.name}
-            style={{ width: '300px' }}
+            style={{ width: '60%', 'object-fit': 'cover' }}
           />
-        </div>
-        <div className="text-white ms-5 details">
-          <h5>{member.name}</h5>
-          <h5>Role: {member.role}</h5>
+          <div className="member-text text-white ms-5 details">
+            <h5>{member.name}</h5>
+            <h5>Role: {member.role}</h5>
+          </div>
         </div>
       </div>
     </>
