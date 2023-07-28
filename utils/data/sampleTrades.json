@@ -1,0 +1,19 @@
+{
+  "-MiBsBKGWFEU-yluPCP-": {
+    "firebaseKey": "-MiBsBKGWFEU-yluPCP-",
+    "tradeItem1": {
+      "firebaseKey": "-MiBsBKGWFEU-yluJkN-",
+      "image": "https://www.allrecipes.com/thmb/ulRSDe4dRRBtVcnARtzEDAX-5s0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/102698681_preview-2000-18a938e58f704966b3f49d2330fd9766.jpg",
+      "name": "Yeastie Boys",
+      "private": false,
+      "uid": "Fnr1zWbt2OOXLO0aHfYUhBN9Wq72"
+    },
+    "tradeItem2": {
+      "firebaseKey": "-NaEJbOQM2XO0MqyVKTN",
+      "image": "https://static.wikia.nocookie.net/spsot/images/e/ed/Mr.Mackey_facebook_profile.png",
+      "name": "MMMK",
+      "private": false,
+      "uid": "Fnr1zWbt2OOXLO0aHfYUhBN9Wq72"
+    }
+  }
+}
