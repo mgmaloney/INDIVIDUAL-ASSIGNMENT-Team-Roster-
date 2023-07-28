@@ -17,6 +17,17 @@ const getAllPublicTeams = async () => {
   }
 };
 
+const filterOutUserTeams = async (uid) => {
+  const publicTeams = await getAllPublicTeams();
+  const nonUserTeams = [];
+  publicTeams.forEach((team) => {
+    if (team.uid !== uid) {
+      nonUserTeams.push(team);
+    }
+  });
+  return nonUserTeams;
+};
+
 const getUserTeams = async (uid) => {
   try {
     const { data } = await axios.get(
@@ -85,6 +96,7 @@ const deleteTeamAndMembers = async (firebaseKey) => {
 
 export {
   getAllPublicTeams,
+  filterOutUserTeams,
   getUserTeams,
   getSingleTeam,
   updateTeam,
