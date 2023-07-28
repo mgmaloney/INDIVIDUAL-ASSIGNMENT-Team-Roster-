@@ -13,6 +13,17 @@ const getAllTrades = async () => {
   }
 };
 
+const filterForUserTrades = async (useruid) => {
+  const trades = await getAllTrades();
+  const userTrades = [];
+  trades.forEach((trade) => {
+    if (useruid === trade.tradeItem1.uid || useruid === trade.TradeItem2.uid) {
+      userTrades.push(trade);
+    }
+  });
+  return userTrades;
+};
+
 const updateTrade = async (payload) => {
   try {
     const { data } = await axios.patch(
@@ -46,4 +57,10 @@ const deleteTrade = async (tradeFbKey) => {
 };
 
 // eslint-disable-next-line object-curly-newline
-export { getAllTrades, updateTrade, createTrade, deleteTrade };
+export {
+  getAllTrades,
+  filterForUserTrades,
+  updateTrade,
+  createTrade,
+  deleteTrade,
+};
