@@ -17,7 +17,7 @@ const updateTrade = async (payload) => {
   try {
     const { data } = await axios.patch(
       `${dbURL}/trades/${payload.firebaseKey}.json`,
-      payload
+      payload,
     );
     return data;
   } catch (e) {
