@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable consistent-return */
 import axios from 'axios';
 import { clientCredentials } from '../client';
@@ -13,7 +14,7 @@ const getAllTrades = async () => {
   }
 };
 
-const filterForUserTrades = async (useruid) => {
+const getUserTrades = async (useruid) => {
   const trades = await getAllTrades();
   const userTrades = [];
   trades.forEach((trade) => {
@@ -28,7 +29,7 @@ const updateTrade = async (payload) => {
   try {
     const { data } = await axios.patch(
       `${dbURL}/trades/${payload.firebaseKey}.json`,
-      payload,
+      payload
     );
     return data;
   } catch (e) {
@@ -57,10 +58,4 @@ const deleteTrade = async (tradeFbKey) => {
 };
 
 // eslint-disable-next-line object-curly-newline
-export {
-  getAllTrades,
-  filterForUserTrades,
-  updateTrade,
-  createTrade,
-  deleteTrade,
-};
+export { getAllTrades, getUserTrades, updateTrade, createTrade, deleteTrade };

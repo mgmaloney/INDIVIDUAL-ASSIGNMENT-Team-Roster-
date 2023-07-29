@@ -28,6 +28,15 @@ export default function NavBar() {
             <Link passHref href="/myteams">
               <Nav.Link>My Teams</Nav.Link>
             </Link>
+            <Link passHref href="/team/new">
+              <Nav.Link>Create New Team</Nav.Link>
+            </Link>
+            <Link passHref href="/mytrades">
+              <Nav.Link>Trade Requests</Nav.Link>
+            </Link>
+            <Link passHref href="/trade/new">
+              <Nav.Link>Start a Trade Request</Nav.Link>
+            </Link>
             <Navbar.Text className="signout" onClick={signOut}>
               Sign Out
             </Navbar.Text>
