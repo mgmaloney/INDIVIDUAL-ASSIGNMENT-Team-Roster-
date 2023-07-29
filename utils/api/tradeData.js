@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable comma-dangle */
 /* eslint-disable consistent-return */
 import axios from 'axios';
@@ -28,7 +29,10 @@ const getUserTrades = async (useruid) => {
   const trades = await getAllTrades();
   const userTrades = [];
   trades.forEach((trade) => {
-    if (useruid === trade.tradeItem1.uid || useruid === trade.TradeItem2.uid) {
+    if (
+      useruid === trade.tradeItem1?.uid ||
+      useruid === trade.tradeItem2?.uid
+    ) {
       userTrades.push(trade);
     }
   });
@@ -60,7 +64,7 @@ const createTrade = async (payload) => {
 
 const deleteTrade = async (tradeFbKey) => {
   try {
-    const { data } = await axios.delete(`${dbURL}/trade/${tradeFbKey}.json`);
+    const { data } = await axios.delete(`${dbURL}/trades/${tradeFbKey}.json`);
     return data;
   } catch (e) {
     console.warn(e);

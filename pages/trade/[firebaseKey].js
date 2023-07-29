@@ -45,7 +45,7 @@ export default function ViewTrade() {
     const updateTradingTeamPayload = { uid: user.uid };
     await updateTeam(updateUserTeamPayload);
     await updateTeam(updateTradingTeamPayload);
-    await updateTrade({ ...trade, accepted: true }).then(() =>
+    await updateTrade({ ...trade, accepted: true, pending: false }).then(() =>
       getSingleTrade(firebaseKey).then(setTrade)
     );
   };
@@ -57,13 +57,13 @@ export default function ViewTrade() {
   };
 
   const tradeText = () => {
-    if (trade.initiatedBy === user.uid && trade.accepted === null) {
-      return '<em>Pending</em>';
+    if (trade.initiatedBy === user.uid && trade.pending) {
+      return <em className="pending-trade">Pending</em>;
     }
-    if (trade.initiatedBy === user.uid && !trade.accepted) {
-      return '<strong>Rejected</strong>';
+    if (trade.initiatedBy === user.uid && !trade.pending && !trade.accepted) {
+      return <strong className="complete-trade">Rejected</strong>;
     }
-    if (trade.initiatedBy !== user.uid && trade.accepted === null) {
+    if (trade.initiatedBy !== user.uid && trade.pending) {
       return (
         <>
           <Button onClick={acceptTrade} variant="primary">
@@ -76,21 +76,26 @@ export default function ViewTrade() {
       );
     }
     if (trade.accepted) {
-      return '<strong>Accepted</strong>';
+      return <strong className="complete-trade">Accepted</strong>;
     }
   };
 
   return (
     <>
-      <div className="view-trade-card">
-        {trade.tradeItem1 && (
-          <>
-            <TeamCard teamObj={trade.tradeItem1} onUpdate={getTeams} />
-            <h2>FOR</h2>
-            <TeamCard teamObj={trade.tradeItem2} onUpdate={getTeams} />
-          </>
-        )}
-        {tradeText()}
+      <div className="header-wrap">
+        <h2 className="header">Trading</h2>
+      </div>
+      <div className="view-trade">
+        <div className="trade-cards">
+          {trade.tradeItem1 && (
+            <>
+              <TeamCard teamObj={trade.tradeItem1} onUpdate={getTeams} />
+              <h2>FOR</h2>
+              <TeamCard teamObj={trade.tradeItem2} onUpdate={getTeams} />
+            </>
+          )}
+        </div>
+        <div className="trade-status">{tradeText()}</div>
       </div>
     </>
   );

@@ -53,11 +53,29 @@ body {
 
 .top-btn,
 .header,
-#single-member {
+#single-member,
+.header-wrap {
   margin: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.view-trade {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.trade-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trade-status {
+  font-size: xx-large;
 }
 
 .header {

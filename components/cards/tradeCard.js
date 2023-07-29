@@ -36,13 +36,17 @@ export default function TradeCard({ tradeObj, onUpdate }) {
   };
 
   const tradeText = () => {
-    if (tradeObj.initiatedBy === user.uid && tradeObj.accepted === null) {
-      return '<em>Pending</em>';
+    if (tradeObj.initiatedBy === user.uid && tradeObj.pending) {
+      return <em className="pending-trade">Pending</em>;
     }
-    if (tradeObj.initiatedBy === user.uid && !tradeObj.accepted) {
-      return '<strong>Rejected</strong>';
+    if (
+      tradeObj.initiatedBy === user.uid &&
+      !tradeObj.pending &&
+      !tradeObj.accepted
+    ) {
+      return <strong className="complete-trade">Rejected</strong>;
     }
-    if (tradeObj.initiatedBy !== user.uid && tradeObj.accepted === null) {
+    if (tradeObj.initiatedBy !== user.uid && tradeObj.pending) {
       return (
         <>
           <Button onClick={acceptTrade} variant="primary">
@@ -55,7 +59,7 @@ export default function TradeCard({ tradeObj, onUpdate }) {
       );
     }
     if (tradeObj.accepted) {
-      return '<strong>Accepted</strong>';
+      return <strong className="complete-trade">Accepted</strong>;
     }
   };
 
@@ -76,7 +80,7 @@ export default function TradeCard({ tradeObj, onUpdate }) {
   return (
     <Card
       style={{
-        width: '18rem',
+        width: '50rem',
         margin: '10px',
       }}
     >
@@ -95,9 +99,13 @@ export default function TradeCard({ tradeObj, onUpdate }) {
               VIEW
             </Button>
           </Link>
-          <Button variant="danger" onClick={cancelTrade} className="m-2">
-            Cancel Trade
-          </Button>
+          {tradeObj.initiatedBy === user.uid ? (
+            <Button variant="danger" onClick={cancelTrade} className="m-2">
+              Cancel Trade
+            </Button>
+          ) : (
+            ''
+          )}
         </div>
       </Card.Body>
     </Card>
@@ -109,6 +117,7 @@ TradeCard.propTypes = {
     firebaseKey: PropTypes.string,
     initiatedBy: PropTypes.string,
     accepted: PropTypes.bool,
+    pending: PropTypes.bool,
     tradeItem1: PropTypes.shape({
       name: PropTypes.string,
       image: PropTypes.string,
