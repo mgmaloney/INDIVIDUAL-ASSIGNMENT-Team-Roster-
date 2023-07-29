@@ -19,8 +19,9 @@ const getAllPublicTeams = async () => {
 
 const filterOutUserTeams = async (uid) => {
   const publicTeams = await getAllPublicTeams();
+  const publicTeamsArr = Object.values(publicTeams);
   const nonUserTeams = [];
-  publicTeams.forEach((team) => {
+  publicTeamsArr.forEach((team) => {
     if (team.uid !== uid) {
       nonUserTeams.push(team);
     }
