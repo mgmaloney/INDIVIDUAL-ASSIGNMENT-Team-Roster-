@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { useEffect, useState } from 'react';
 import TradeCard from '../components/cards/tradeCard';
 import { getUserTrades } from '../utils/api/tradeData';

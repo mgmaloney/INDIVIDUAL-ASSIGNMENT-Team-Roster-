@@ -14,6 +14,16 @@ const getAllTrades = async () => {
   }
 };
 
+const getSingleTrade = async (firebaseKey) => {
+  try {
+    const { data } = await axios.get(`${dbURL}/trades/${firebaseKey}.json`);
+    console.warn(data);
+    return data;
+  } catch (e) {
+    console.warn(e);
+  }
+};
+
 const getUserTrades = async (useruid) => {
   const trades = await getAllTrades();
   const userTrades = [];
@@ -58,4 +68,11 @@ const deleteTrade = async (tradeFbKey) => {
 };
 
 // eslint-disable-next-line object-curly-newline
-export { getAllTrades, getUserTrades, updateTrade, createTrade, deleteTrade };
+export {
+  getAllTrades,
+  getUserTrades,
+  getSingleTrade,
+  updateTrade,
+  createTrade,
+  deleteTrade,
+};

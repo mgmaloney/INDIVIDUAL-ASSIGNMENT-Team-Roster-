@@ -1,10 +1,13 @@
+/* eslint-disable consistent-return */
+/* eslint-disable comma-dangle */
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
-import { deleteTrade } from '../../utils/api/tradeData';
+import { deleteTrade, updateTrade } from '../../utils/api/tradeData';
+import { updateTeam } from '../../utils/api/teamData';
 
 export default function TradeCard({ tradeObj, onUpdate }) {
   const [userTeam, setUserTeam] = useState({});
@@ -17,6 +20,42 @@ export default function TradeCard({ tradeObj, onUpdate }) {
     } else {
       setUserTeam(tradeObj.tradeItem2);
       setTradingForTeam(tradeObj.tradeItem1);
+    }
+  };
+
+  const acceptTrade = async () => {
+    const updateUserTeamPayload = { uid: tradingForTeam.uid };
+    const updateTradingTeamPayload = { uid: user.uid };
+    await updateTeam(updateUserTeamPayload);
+    await updateTeam(updateTradingTeamPayload);
+    await updateTrade({ ...tradeObj, accepted: true }).then(() => onUpdate());
+  };
+  const rejectTrade = async () => {
+    const rejectPayload = { ...tradeObj, accepted: false };
+    await updateTrade(rejectPayload).then(() => onUpdate());
+  };
+
+  const tradeText = () => {
+    if (tradeObj.initiatedBy === user.uid && tradeObj.accepted === null) {
+      return '<em>Pending</em>';
+    }
+    if (tradeObj.initiatedBy === user.uid && !tradeObj.accepted) {
+      return '<strong>Rejected</strong>';
+    }
+    if (tradeObj.initiatedBy !== user.uid && tradeObj.accepted === null) {
+      return (
+        <>
+          <Button onClick={acceptTrade} variant="primary">
+            Accept Trade
+          </Button>
+          <Button onClick={rejectTrade} variant="danger">
+            Reject Trade
+          </Button>
+        </>
+      );
+    }
+    if (tradeObj.accepted) {
+      return '<strong>Accepted</strong>';
     }
   };
 
@@ -50,6 +89,7 @@ export default function TradeCard({ tradeObj, onUpdate }) {
             </span>{' '}
             for {tradingForTeam.name}
           </Card.Text>
+          <Card.Text>{tradeText()}</Card.Text>
           <Link passHref href={`/trade/${tradeObj.firebaseKey}`}>
             <Button variant="primary" className="m-2">
               VIEW
@@ -67,6 +107,8 @@ export default function TradeCard({ tradeObj, onUpdate }) {
 TradeCard.propTypes = {
   tradeObj: PropTypes.shape({
     firebaseKey: PropTypes.string,
+    initiatedBy: PropTypes.string,
+    accepted: PropTypes.bool,
     tradeItem1: PropTypes.shape({
       name: PropTypes.string,
       image: PropTypes.string,
