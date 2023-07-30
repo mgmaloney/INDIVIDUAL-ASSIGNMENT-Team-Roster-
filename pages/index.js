@@ -14,7 +14,6 @@ function Home() {
 
   useEffect(() => {
     getPublicTeams();
-    console.warn(teams);
   }, []);
 
   return (

@@ -21,14 +21,14 @@ export default function MemberCard({ memberObj, onUpdate }) {
       style={{
         width: '18rem',
         margin: '10px',
-        'border-radius': '0 0 30px 30px',
+        borderRadius: '0 0 30px 30px',
       }}
     >
       <Card.Img
         variant="top"
         src={memberObj.image}
         alt={memberObj.name}
-        style={{ height: '300px', 'object-fit': 'cover' }}
+        style={{ height: '300px', objectFit: 'cover' }}
       />
       <Card.Body className="card-body">
         <Card.Title>{memberObj.name}</Card.Title>
