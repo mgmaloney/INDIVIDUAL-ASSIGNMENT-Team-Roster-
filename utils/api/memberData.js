@@ -10,7 +10,6 @@ const getTeamMembers = async (teamFbKey) => {
     const { data } = await axios.get(
       `${dbURL}/members.json?orderBy="team_id"&equalTo="${teamFbKey}"`
     );
-    console.warn(data);
     return data;
   } catch (e) {
     console.warn(e);
@@ -20,7 +19,6 @@ const getTeamMembers = async (teamFbKey) => {
 const getSingleMember = async (memberFbKey) => {
   try {
     const { data } = await axios.get(`${dbURL}/members/${memberFbKey}.json`);
-    console.warn(data);
     return data;
   } catch (e) {
     console.warn(e);

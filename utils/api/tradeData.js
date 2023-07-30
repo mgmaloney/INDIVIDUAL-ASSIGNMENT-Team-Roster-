@@ -39,6 +39,19 @@ const getUserTrades = async (useruid) => {
   return userTrades;
 };
 
+const getUnreadTrades = async (useruid) => {
+  const userTradesResponse = await getUserTrades(useruid);
+  const userTrades = Object.values(userTradesResponse);
+  const unreadTrades = [];
+  userTrades.forEach((tradeObj) => {
+    if (tradeObj.read === false) {
+      unreadTrades.push(tradeObj);
+    }
+  });
+  console.warn('unread trades', unreadTrades);
+  return unreadTrades;
+};
+
 const updateTrade = async (payload) => {
   try {
     const { data } = await axios.patch(
@@ -76,6 +89,7 @@ export {
   getAllTrades,
   getUserTrades,
   getSingleTrade,
+  getUnreadTrades,
   updateTrade,
   createTrade,
   deleteTrade,

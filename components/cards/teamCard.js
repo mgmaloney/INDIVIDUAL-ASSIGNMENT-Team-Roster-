@@ -31,14 +31,14 @@ export default function TeamCard({ teamObj, onUpdate }) {
       style={{
         width: '18rem',
         margin: '10px',
-        'border-radius': '0 0 30px 30px',
+        borderRadius: '0 0 30px 30px',
       }}
     >
       <Card.Img
         variant="top"
         src={teamObj.image}
         alt={teamObj.name}
-        style={{ height: '300px', 'object-fit': 'cover' }}
+        style={{ height: '300px', objectFit: 'cover' }}
       />
       <Card.Body className="card-body">
         <Card.Title>{teamObj.name}</Card.Title>

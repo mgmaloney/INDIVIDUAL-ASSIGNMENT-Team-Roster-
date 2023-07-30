@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable consistent-return */
 /* eslint-disable comma-dangle */
 import { useEffect, useState } from 'react';
