@@ -30,9 +30,9 @@ export default function NavBar() {
     tradeCheck();
   }, []);
 
-  useInterval(() => {
-    tradeCheck();
-  }, 5000);
+  // useInterval(() => {
+  //   tradeCheck();
+  // }, 5000);
 
   const handleTradeNotificationsReset = () => {
     setTradeBadge(0);
