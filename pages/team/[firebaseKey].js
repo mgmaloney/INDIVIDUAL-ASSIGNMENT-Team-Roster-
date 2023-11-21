@@ -33,8 +33,10 @@ export default function ViewTeam() {
 
   return (
     <>
-      <div className="header">
-        <h1>Team: {team?.name}</h1>
+      <div className="header-div">
+        <div className="header">
+          <h1>Team: {team?.name}</h1>
+        </div>
       </div>
       <div className="top-btn">
         <Button variant="primary" onClick={addButtonClick} className="m-2">
